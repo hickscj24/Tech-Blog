@@ -20,8 +20,9 @@ Post.init(
       allowNull: false
     },
     date: {
-      type: "TIMESTAMP",
-      allowNull: false
+      type: "TIMESTAMP", 
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: true
     },
     author_name: {
       type: DataTypes.STRING,

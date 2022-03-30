@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Comment, Post, User } = require('../../models');
-
+const withAuth = require('../../utils/auth');
 // The `/api/products` endpoint
 
 // get all products
@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     // create a new tag
     User.create(req.body)
       .then((users) => res.status(200).json(users))
@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
   });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     // update a tag's name by its `id` value
     User.update(req.body, {
       where: {
@@ -59,7 +59,7 @@ router.put('/:id', (req, res) => {
       });
   });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   // delete one product by its `id` value
   User.destroy( {
     where: {
